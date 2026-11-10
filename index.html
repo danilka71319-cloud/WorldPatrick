@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#10152f">
+  <title>WorldPatrick — Patrick OS</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root { color-scheme: dark; --bg:#10152f; --panel:#1b2448; --panel2:#25315d; --pink:#ff83b7; --cyan:#70e4e7; --text:#f7f5ff; --muted:#b7bfdc; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; color:var(--text); font-family:system-ui,-apple-system,Segoe UI,sans-serif; background:radial-gradient(circle at 15% 0%,#344477 0,#10152f 48%,#090d20 100%); }
+    .wrap { max-width:560px; margin:auto; padding:20px 16px 30px; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .brand { font-size:23px; font-weight:850; letter-spacing:.2px; }
+    .brand span { color:var(--pink); }
+    .status { font-size:12px; color:var(--muted); background:#ffffff12; padding:8px 11px; border:1px solid #ffffff18; border-radius:30px; }
+    .hero { margin-top:20px; padding:20px; border-radius:24px; background:linear-gradient(135deg,#273765,#432c67 72%,#63345f); border:1px solid #ffffff25; box-shadow:0 14px 35px #0005; overflow:hidden; position:relative; }
+    .hero:after { content:"⭐"; position:absolute; right:18px; top:12px; font-size:54px; opacity:.22; transform:rotate(18deg); }
+    .hero h1 { margin:0 0 6px; font-size:24px; }
+    .hero p { margin:0; color:#e1e4ff; font-size:14px; line-height:1.45; max-width:82%; }
+    .section-title { margin:24px 2px 12px; font-size:16px; font-weight:750; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    button.tile { min-height:104px; border:1px solid #ffffff18; border-radius:18px; padding:13px 7px; background:linear-gradient(160deg,#25325f,#1a2346); color:var(--text); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; font:inherit; cursor:pointer; box-shadow:0 7px 16px #0002; }
+    button.tile:active { transform:scale(.97); }
+    .emoji { font-size:29px; line-height:1; }
+    .tile b { font-size:12px; font-weight:700; text-align:center; }
+    .footer { margin-top:22px; text-align:center; color:var(--muted); font-size:11px; }
+    .overlay { display:none; position:fixed; inset:0; background:#050817c9; align-items:flex-end; justify-content:center; padding:16px; }
+    .overlay.show { display:flex; }
+    .modal { width:min(100%,520px); padding:20px; border-radius:22px; background:#202b53; border:1px solid #ffffff24; box-shadow:0 20px 50px #0008; }
+    .modal h2 { margin:0 0 8px; font-size:19px; }
+    .modal p { margin:0 0 16px; color:var(--muted); font-size:14px; }
+    .close { width:100%; padding:12px; border:0; border-radius:14px; background:var(--pink); color:#23152a; font-weight:800; font-size:14px; }
+    @media (max-width:360px) { .grid { gap:7px; } button.tile { min-height:94px; } .tile b { font-size:11px; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">World<span>Patrick</span></div>
+      <div class="status">🌊 Patrick OS</div>
+    </header>
+    <section class="hero">
+      <h1>Привет, друг! 👋</h1>
+      <p>Добро пожаловать в Мир Патрика. Выбирай приложение и исследуй подводный мир!</p>
+    </section>
+    <div class="section-title">📱 Мои приложения</div>
+    <section class="grid" aria-label="Приложения">
+      <button class="tile" data-name="Гардероб"><span class="emoji">👕</span><b>Гардероб</b></button>
+      <button class="tile" data-name="PatrickShop"><span class="emoji">🛍️</span><b>PatrickShop</b></button>
+      <button class="tile" data-name="Patrick Paint"><span class="emoji">🎨</span><b>Patrick Paint</b></button>
+      <button class="tile" data-name="Файлы"><span class="emoji">📁</span><b>Файлы</b></button>
+      <button class="tile" data-name="Браузер"><span class="emoji">🌐</span><b>Браузер</b></button>
+      <button class="tile" data-name="Заметки"><span class="emoji">📝</span><b>Заметки</b></button>
+      <button class="tile" data-name="Калькулятор"><span class="emoji">🧮</span><b>Калькулятор</b></button>
+      <button class="tile" data-name="Музыка"><span class="emoji">🎵</span><b>Музыка</b></button>
+      <button class="tile" data-name="Моя комната"><span class="emoji">🏡</span><b>Моя комната</b></button>
+      <button class="tile" data-name="Настройки"><span class="emoji">⚙️</span><b>Настройки</b></button>
+      <button class="tile" data-name="Панель создателя"><span class="emoji">👑</span><b>Панель создателя</b></button>
+      <button class="tile" data-name="Пользователи онлайн"><span class="emoji">👥</span><b>Онлайн</b></button>
+    </section>
+    <div class="footer">WorldPatrick • Первая тестовая версия интерфейса</div>
+  </main>
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2 id="modalTitle">Приложение</h2>
+      <p>Это стартовый макет WorldPatrick. Этот раздел подключим на следующем этапе.</p>
+      <button class="close" id="closeModal">Понятно</button>
+    </div>
+  </div>
+  <script>
+    const tg = window.Telegram && window.Telegram.WebApp;
+    if (tg) { tg.ready(); tg.expand(); }
+    const overlay = document.getElementById('overlay');
+    const title = document.getElementById('modalTitle');
+    document.querySelectorAll('.tile').forEach((button) => {
+      button.addEventListener('click', () => {
+        title.textContent = button.dataset.name;
+        overlay.classList.add('show');
+        if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', () => overlay.classList.remove('show'));
+    overlay.addEventListener('click', (event) => { if (event.target === overlay) overlay.classList.remove('show'); });
+  </script>
+</body>
+</html>
